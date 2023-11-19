@@ -105,7 +105,7 @@ function printCartas(jugadas, baraja, participante) {
 
     //en base a lo anterior, saco la el valor de la carta
 
-    sacoValor = sacoRepresentacion.map(item => item.replace(/[CDTP]/g, ''));
+    sacoValor = sacoRepresentacion.map(item => item.replace(/[CDTP]/g, ''));//Uso exprsion regular para quitar las letras de la bajaja (CDTP)
 
 
     //Creo Objeto
@@ -122,21 +122,21 @@ function printCartas(jugadas, baraja, participante) {
 
     //quito carta de la baraja
 
+   
     for (let index = 0; index < baraja.length; index++) {
 
         if (baraja[index] == representacion) {
 
-            baraja = baraja.splice(index, 1);
+            baraja.splice(index, 1);
         }
 
     }
+    
 
     //Imprimo cartas segun esas variables
 
     let mano = document.getElementById(`mano-${participante}`);
-
-    // Suponiendo que 'imagen' y 'representacion' están definidos antes de este código
-
+   
     setTimeout(function () {
         mano.innerHTML += `<img src="utils/${imagen}" alt="${representacion}" style="width: 50px;">`;
     }, 900);
@@ -168,13 +168,15 @@ function printCartas(jugadas, baraja, participante) {
     //paro juego si superan 21
 
     paroJuego(sumaC, sumaJ);
+   
 }
 
 
 
+
+
+
 function paroJuego(valor1, valor2) {
-
-
 
     if (valor1 > 22 || valor2 > 22) {
 
