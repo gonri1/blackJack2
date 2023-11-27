@@ -3,6 +3,7 @@
 /* https://github.com/gonri1/blackJack2 */
 
 
+
 //Establezco variables que voy a necesitar
 
 let cartas = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
@@ -45,8 +46,6 @@ baraja = _.shuffle(baraja);
 
 //console.log(baraja);//Carta barajada
 
-//Importo clase carta
-
 //CREANDO Clase Tipo Carta
 
 class carta {
@@ -81,6 +80,7 @@ class carta {
 
 }
 
+
 //Creo funcion que me imprima las cartas
 
 function printCartas(jugadas, baraja, participante) {
@@ -105,7 +105,7 @@ function printCartas(jugadas, baraja, participante) {
 
     //en base a lo anterior, saco la el valor de la carta
 
-    sacoValor = sacoRepresentacion.map(item => item.replace(/[CDTP]/g, ''));//Uso exprsion regular para quitar las letras de la bajaja (CDTP)
+    sacoValor = sacoRepresentacion.map(item => item.replace(/[CDTP]/g, ''));//Uso expresion regular para quitar las letras de la bajaja (CDTP)
 
 
     //Creo Objeto
@@ -122,7 +122,7 @@ function printCartas(jugadas, baraja, participante) {
 
     //quito carta de la baraja
 
-   
+
     for (let index = 0; index < baraja.length; index++) {
 
         if (baraja[index] == representacion) {
@@ -131,12 +131,12 @@ function printCartas(jugadas, baraja, participante) {
         }
 
     }
-    
+
 
     //Imprimo cartas segun esas variables
 
     let mano = document.getElementById(`mano-${participante}`);
-   
+
     setTimeout(function () {
         mano.innerHTML += `<img src="utils/${imagen}" alt="${representacion}" style="width: 50px;">`;
     }, 900);
@@ -165,93 +165,10 @@ function printCartas(jugadas, baraja, participante) {
         }, 1200);
     }
 
-    //paro juego si superan 21
 
-    paroJuego(sumaC, sumaJ);
-   
-}
-
-
-
-
-
-
-function paroJuego(valor1, valor2) {
-
-    if (valor1 > 22 || valor2 > 22) {
-
-        document.getElementById('pedir-cartas').disabled = true;
-        document.getElementById('pedir-cartas-crupier').disabled = true;
-
-        let parada = document.getElementById(`ganador`);
-
-        setTimeout(function () {
-            parada.innerHTML = "PERDISTE";
-        }, 1350)
-      
-
-    }
-}
-
-function plantarseJ() {
-
-    document.getElementById('pedir-cartas').disabled = true;
-    document.getElementById('pedir-cartas-crupier').disabled = true;
-
-    //al pulsar plantarse el jugador, imprimo quien ha gadado
-    ganador(sumaC, sumaJ);
-
-}
-function plantarseC() {
-
-    document.getElementById('pedir-cartas').disabled = false;
-    document.getElementById('pedir-cartas-crupier').disabled = true;
+    paroJuego(sumaC, sumaJ); //llamo funcion paro juego si superan 21
 
 }
 
 
-function ganador(valor1, valor2) {
 
-
-
-    if (valor1 > valor2) {
-
-        let ganador = document.getElementById(`ganador`);
-        ganador.innerHTML = "GANA BANCA";
-        document.getElementById('pedir-cartas').disabled = true;
-        document.getElementById('pedir-cartas-crupier').disabled = true;
-        document.getElementById('plantarseJ').disabled = true;
-        document.getElementById('plantarseC').disabled = true;
-
-    } else if (valor1 < valor2) {
-        let ganador = document.getElementById(`ganador`);
-        ganador.innerHTML = `GANA "${nombreJugador}"`;
-        document.getElementById('pedir-cartas').disabled = true;
-        document.getElementById('pedir-cartas-crupier').disabled = true;
-        document.getElementById('plantarseJ').disabled = true;
-        document.getElementById('plantarseC').disabled = true;
-
-    } else if (valor1 == valor2) {
-        let ganador = document.getElementById(`ganador`);
-        ganador.innerHTML = "EMPATE";
-        document.getElementById('pedir-cartas').disabled = true;
-        document.getElementById('pedir-cartas-crupier').disabled = true;
-        document.getElementById('plantarseJ').disabled = true;
-        document.getElementById('plantarseC').disabled = true;
-
-
-    }
-
-}
-
-
-function nuevaPartida() {
-
-    sumaJ = 0;
-    sumaC = 0;
-    document.getElementById('pedir-cartas').disabled = true;
-    document.getElementById('pedir-cartas-crupier').disabled = true;
-    document.getElementById('plantarseJ').disabled = true;
-    document.getElementById('plantarseC').disabled = true;
-
-}
